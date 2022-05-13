@@ -3,18 +3,18 @@ package com.chipo.DangKyDangNhap.config;
 import com.chipo.DangKyDangNhap.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
-@Configuration
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -23,16 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
+    AppConfig appConfig = new AppConfig();
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception {
         // Set dịch vụ để tìm kiếm User trong Database và dùng PasswordEncoder mã hóa password.
-        authentication.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authentication.userDetailsService(userDetailsService).passwordEncoder(appConfig.passwordEncoder());
     }
 
     @Override
@@ -63,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccess");
 
         // Cấu hình Remember Me.
         http.authorizeRequests().and() //

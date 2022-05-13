@@ -30,6 +30,7 @@ public class AppUser {
 
     @Column(name = "Encryted_Password", length = 128, nullable = false)
     private String encrytedPassword;
+
     @Lob
     private String avatar;
 

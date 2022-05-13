@@ -17,7 +17,7 @@ import java.security.Principal;
 public class MainController {
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
-        model.addAttribute("title", "Welcome");
+        model.addAttribute("title", "Welcome!");
         model.addAttribute("message", "This is welcome page!");
         return "welcomePage";
     }
@@ -39,10 +39,10 @@ public class MainController {
         return "loginPage";
     }
 
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
+    @RequestMapping(value = "/logoutSuccess", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Logout");
-        return "logoutSuccessfulPage";
+        return "logoutSuccessPage";
     }
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
@@ -58,7 +58,7 @@ public class MainController {
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "userInfoPage";
+        return "userPage";
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)

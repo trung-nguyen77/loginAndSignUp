@@ -1,8 +1,5 @@
 package com.chipo.DangKyDangNhap.entity;
 
-
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,8 +11,8 @@ public class AppRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Role_Id", nullable = false)
     private Long roleId;
-    @Enumerated(EnumType.STRING)
-    @NaturalId
+
+
     @Column(name = "Role_Name", length = 30, nullable = false)
     private String RoleName;
 
